@@ -24,7 +24,7 @@
 ## Enviroment Setup
 ### UI Automation
 > We utilize Macaca, an open-source automation testing framework that supports various types of applications including native, mobile, hybrid, web, and mobile web applications. Macaca offers automation drivers, environment support, peripheral tools, and integration solutions to tackle challenges such as test automation and client-side performance.In addition, we configure NoSmoke, a cross-platform UI crawler that scans view trees, performs OCR operations, and generates and executes UI test cases.
-- install macaca `https://macacajs.github.io/guide/environment-setup.html#macaca-cli`
+- install macaca <https://macacajs.github.io/guide/environment-setup.html#macaca-cli>
 - install nosmoke `https://macacajs.github.io/NoSmoke/guide/`
 
 
