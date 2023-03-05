@@ -1,0 +1,6 @@
+[*] Started: Modify Return Value
+
+[!] frida hooking exception.
+
+[!] frida hooking exception.
+
