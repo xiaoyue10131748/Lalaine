@@ -29,22 +29,17 @@
 
 
 ### Sensive API Hooking
-> We utilize Frida a dynamic code instrumentation toolkit. We inject snippets of JavaScript into native apps on iOS. We built our hooking framework on top of the Frida API.
+> We utilize Frida, a dynamic code instrumentation toolkit. We inject snippets of JavaScript into native apps on iOS. We built our hooking framework on top of the Frida API.
+
+- install Frida’s CLI tools on MacOS: `https://frida.re/docs/installation/` 
+- configure Frida on your rooted iOS device: `https://frida.re/docs/ios/`
+
+### Network monitor
+> We utilized Fiddler, which is a web debugging proxy tool that monitors, analyzes and modifies the traffic on iOS device. 
+- install Fiddler in your MacOS: `https://docs.telerik.com/fiddler/configure-fiddler/tasks/configureformac`
+- configure your rooted iOS device: `https://docs.telerik.com/fiddler/configure-fiddler/tasks/configureforios`
 
 
-
-Some text
-
-```text
-folder1/
-└── folder2/
-    ├── folder3/
-    │   ├── file1
-    │   └── file2
-    └── folder4/
-        ├── file3
-        └── file4
-```
 
 ## Bugs and feature requests
 
