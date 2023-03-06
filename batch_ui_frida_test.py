@@ -13,8 +13,9 @@ import os, signal
 import yaml
 import shutil
 import json
+import tqdm.asyncio
 
-
+ROOT=""
 ## 读取yaml文件
 def readyaml(file):
     if os.path.isfile(file):
@@ -89,10 +90,10 @@ def process(name):
 
 
 #280
-@time_out(180, timeout_callback)
+@time_out(250, timeout_callback)
 def test_one_app(bundleID):
 	try:
-		signal_test(bundleID)
+		signal_test(bundleID,ROOT)
 	except KeyboardInterrupt:
 		print("KeyboardInterrupt")
 		return
@@ -178,23 +179,26 @@ if __name__ == "__main__":
 
 	folder=sys.argv[1]
 	#bundleID="ai.cloudmall.ios"
+	#root="/Users/xiaoyue-admin/Documents/privacy_label/code/batch_dynamic_test"
+	ROOT=sys.argv[2]
 
-	app_input_path = '/Users/xiaoyue-admin/Documents/privacy_label/code/batch_dynamic_test/app/'+ str(folder)+"/"
-	frida_output_path= '/Users/xiaoyue-admin/Documents/privacy_label/code/batch_dynamic_test/result/'+ str(folder)+"/frida_output/"
-	log_file= '/Users/xiaoyue-admin/Documents/privacy_label/code/batch_dynamic_test/result/'+ str(folder) +'/log.txt'
-	reports_path = '/Users/xiaoyue-admin/Documents/privacy_label/code/batch_dynamic_test/result/'+ str(folder)+"/reports/"
-	error_log = '/Users/xiaoyue-admin/Documents/privacy_label/code/batch_dynamic_test/result/'+ str(folder) +'/error_log.txt'
-	#判断 app input folder 是否存在
+
+	app_input_path = ROOT+'/app/'+ str(folder)+"/"
+	frida_output_path= ROOT+'/result/'+ str(folder)+"/frida_output/"
+	log_file= ROOT+'/result/'+ str(folder) +'/log.txt'
+	reports_path = ROOT+'/result/'+ str(folder)+"/reports/"
+	error_log = ROOT+'/result/'+ str(folder) +'/error_log.txt'
+	#determine app input folder is exsiting
 	if not os.path.exists(app_input_path):
 		print("no app input")
 		sys.exit(1)
 
 
-	#判断frida output folder 是否存在
+	#determine frida output folder is exsiting
 	if not os.path.exists(frida_output_path):
 		os.makedirs(frida_output_path)
 
-	#判断macaca report folder 是否存在
+	#determine macaca report folder is exsiting
 	if not os.path.exists(reports_path):
 		os.makedirs(reports_path)
 
@@ -230,13 +234,13 @@ if __name__ == "__main__":
 
 			##move frida out put to sepcific folder
 			#ipa_name=ipa.split(".ipa")[0] + ".txt"
-			src="/Users/xiaoyue-admin/Documents/privacy_label/code/batch_dynamic_test/frida_tmp.txt"
+			src=ROOT+"/frida_tmp.txt"
 			dst=frida_output_path + ipa_name
 			shutil.move(src, dst)
 
 
 			##move macaca report to sepeific folder
-			orignal_macaca_path="/Users/xiaoyue-admin/Documents/privacy_label/code/batch_dynamic_test/reports"
+			orignal_macaca_path=ROOT+"/reports"
 			src_screen_shoot=get_current_report(orignal_macaca_path)
 			dst_screen_shoot=reports_path+ipa.split(".ipa")[0] + "/"
 			try:

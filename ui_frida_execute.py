@@ -10,7 +10,7 @@ from install import *
 import subprocess
 import logging
 import signal
-
+import tqdm
 
 
 logging.basicConfig(
@@ -30,7 +30,7 @@ async def start_UI_crawler():
     p = await asyncio.create_subprocess_exec('/usr/local/lib/node_modules/nosmoke/bin/nosmoke', '-u', '00008020-001564210E78002E',"-s")
     fut = p.communicate()
     try:
-        pcap_run = await asyncio.wait_for(fut, timeout=170)
+        pcap_run = await asyncio.wait_for(fut, timeout=250)
     except asyncio.TimeoutError:
         p.kill()
         await p.communicate()
@@ -53,7 +53,7 @@ async def start_UI_crawler():
 
 
 def on_message(message,data):
-    file_name="/Users/xiaoyue-admin/Documents/privacy_label/code/batch_dynamic_test/frida_tmp.txt"
+    file_name="./frida_tmp.txt"
     with open(file_name, 'a+',encoding = "utf8") as f:
         if message['type'] == 'send':
             f.write(message['payload'] + "\n\n")
@@ -65,7 +65,7 @@ def frida_attach(device, bundleID):
         applications = device.enumerate_applications()
         for application in applications:
             if application.identifier == bundleID:
-                print(application.pid)
+                #print(application.pid)
                 if application.pid !=0:
                     app_name = application.name
                     session = device.attach(app_name)
@@ -73,18 +73,15 @@ def frida_attach(device, bundleID):
                     return session
                 else:
                     time.sleep(2)
-                    print("waiting for target process...")
 
 
 
-
-
-async def frida_process(bundleID):  
+async def frida_process(bundleID,ROOT):  
     device = frida.get_usb_device(10)
     session = frida_attach(device, bundleID)
     print("executed")
     await asyncio.sleep(1)
-    with open("/Users/xiaoyue-admin/Documents/privacy_label/code/batch_dynamic_test/hook_sensitive_api.js","r", encoding = "utf8") as f:
+    with open(ROOT+"/hook_sensitive_api.js","r", encoding = "utf8") as f:
         script = session.create_script(f.read())
     
     script.on("message",on_message)
@@ -105,8 +102,13 @@ def thread_loop_task(loop):
     loop.close()
 
 
+async def print_process(flen):
+    for _ in tqdm.tqdm(range(flen)):
+        await asyncio.sleep(0.1)
 
-def signal_test(bundleID):
+
+
+def signal_test(bundleID, ROOT):
     # 创建一个事件循环thread_loop
     thread_loop = asyncio.new_event_loop() 
 
@@ -114,11 +116,13 @@ def signal_test(bundleID):
     t = threading.Thread(target=thread_loop_task, args=(thread_loop,))
     t.daemon = True
     t.start()
- 
+
+    asyncio.run(print_process(100))
+
     try:
-        asyncio.run(frida_process(bundleID))
+        asyncio.run(frida_process(bundleID,ROOT))
     except:
-        file_name="/Users/xiaoyue-admin/Documents/privacy_label/code/batch_dynamic_test/frida_tmp.txt"
+        file_name=ROOT+"/frida_tmp.txt"
         with open(file_name, 'a+',encoding = "utf8") as f:
             f.write("[!] frida hooking exception."+ "\n\n")
 

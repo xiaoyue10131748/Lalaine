@@ -1,0 +1,192 @@
+[*] Started: Modify Return Value
+
+
+[*] Class Name: UIDevice
+
+[*] Method Name: - identifierForVendor
+
+	[-] Type of return value: object
+
+	[-] Return Value: F444AC21-0DB3-435E-8F28-933A38144B8F
+
+	Backtrace:
+	0x1022cf4b8 ComScore!+[SCORHelper uniqueId]
+	0x102292d14 ComScore!ComScore::SystemInfo::refreshDeviceIds()
+	0x102236b7c ComScore!ComScore::SystemInfo::getDeviceIds()
+	0x10223754c ComScore!ComScore::IdHelper::generatePublisherUniqueDeviceId(ComScore::String)
+	0x102251d9c ComScore!ComScore::Core::checkAndUpdatePublisherUniqueDeviceId()
+	0x1022516ac ComScore!ComScore::Core::initializeConfigurationDependent()
+	0x1022545e0 ComScore!ComScore::Core::onConfigurationChanged(ComScore::ConfigurationType)
+	0x10224d2b4 ComScore!ComScore::Configuration::notifyConfigurationChanged(ComScore::ConfigurationType)
+	0x10224cb90 ComScore!ComScore::Configuration::initialize()
+	0x10224ca04 ComScore!ComScore::Configuration::mergeConfigurations()
+	0x10223bc74 ComScore!ComScore::Task::run()
+	0x102277140 ComScore!ComScore::ContextTasksThread<ComScore::Core>::run()
+	0x1022b8bc4 ComScore!ComScore::Thread::threadEntryPoint()
+	0x1022bc970 ComScore!threadEntryProc
+	0x1f14e4bfc libsystem_pthread.dylib!_pthread_start
+
+
+[*] Class Name: ASIdentifierManager
+
+[*] Method Name: - advertisingIdentifier
+
+	[-] Type of return value: object
+
+	[-] Return Value: 00000000-0000-0000-0000-000000000000
+
+	Backtrace:
+	0x1022d027c ComScore!+[SCORHelper trackingID]
+	0x1022cf784 ComScore!+[SCORHelper crossPublisherIdSourceValue]
+	0x102292ee0 ComScore!ComScore::SystemInfo::refreshCrossPublisherUniqueDeviceId()
+	0x1022378a4 ComScore!ComScore::IdHelper::generateCrossPublisherUniqueDeviceId()
+	0x1022439b4 ComScore!ComScore::EventManager::addIdLabels(ComScore::Event*, std::__1::shared_ptr<ComScore::Configuration>)
+	0x102242550 ComScore!ComScore::EventManager::addLabels(ComScore::Event*, long long, ComScore::EventInfo const&, std::__1::shared_ptr<ComScore::Configuration>)
+	0x102240dc8 ComScore!ComScore::EventManager::send(ComScore::Event*, long long, ComScore::EventInfo const&, std::__1::shared_ptr<ComScore::Configuration>)
+	0x1022408d0 ComScore!ComScore::EventManager::sendStartEvent(long long, ComScore::EventInfo const&, std::__1::shared_ptr<ComScore::Configuration>)
+	0x10227ec6c ComScore!std::__1::__function::__func<ComScore::Core::enqueueStartEvent(long long)::$_27, std::__1::allocator<ComScore::Core::enqueueStartEvent(long long)::$_27>, void (ComScore::Task*, std::__1::shared_ptr<ComScore::Configuration>)>::operator()(ComScore::Task*&&, std::__1::shared_ptr<ComScore::Configuration>&&)
+	0x10227f190 ComScore!std::__1::__function::__func<ComScore::Core::newEventTask(std::__1::function<void (ComScore::Task*, std::__1::shared_ptr<ComScore::Configuration>)>)::$_28, std::__1::allocator<ComScore::Core::newEventTask(std::__1::function<void (ComScore::Task*, std::__1::shared_ptr<ComScore::Configuration>)>)::$_28>, void (ComScore::Task*)>::operator()(ComScore::Task*&&)
+	0x10223bc74 ComScore!ComScore::Task::run()
+	0x10225223c ComScore!ComScore::Core::consumeTimeWindowEvents()
+	0x102254650 ComScore!ComScore::Core::onConfigurationChanged(ComScore::ConfigurationType)
+	0x10224d2b4 ComScore!ComScore::Configuration::notifyConfigurationChanged(ComScore::ConfigurationType)
+	0x10224cb90 ComScore!ComScore::Configuration::initialize()
+	0x10224ca04 ComScore!ComScore::Configuration::mergeConfigurations()
+
+
+[*] Class Name: ASIdentifierManager
+
+[*] Method Name: - advertisingIdentifier
+
+	[-] Type of return value: object
+
+	[-] Return Value: 00000000-0000-0000-0000-000000000000
+
+	Backtrace:
+	0x1022d027c ComScore!+[SCORHelper trackingID]
+	0x1022d0b98 ComScore!+[SCORHelper isAdIdZeros]
+	0x1022cf7e8 ComScore!+[SCORHelper crossPublisherIdSourceValue]
+	0x102292ee0 ComScore!ComScore::SystemInfo::refreshCrossPublisherUniqueDeviceId()
+	0x1022378a4 ComScore!ComScore::IdHelper::generateCrossPublisherUniqueDeviceId()
+	0x1022439b4 ComScore!ComScore::EventManager::addIdLabels(ComScore::Event*, std::__1::shared_ptr<ComScore::Configuration>)
+	0x102242550 ComScore!ComScore::EventManager::addLabels(ComScore::Event*, long long, ComScore::EventInfo const&, std::__1::shared_ptr<ComScore::Configuration>)
+	0x102240dc8 ComScore!ComScore::EventManager::send(ComScore::Event*, long long, ComScore::EventInfo const&, std::__1::shared_ptr<ComScore::Configuration>)
+	0x1022408d0 ComScore!ComScore::EventManager::sendStartEvent(long long, ComScore::EventInfo const&, std::__1::shared_ptr<ComScore::Configuration>)
+	0x10227ec6c ComScore!std::__1::__function::__func<ComScore::Core::enqueueStartEvent(long long)::$_27, std::__1::allocator<ComScore::Core::enqueueStartEvent(long long)::$_27>, void (ComScore::Task*, std::__1::shared_ptr<ComScore::Configuration>)>::operator()(ComScore::Task*&&, std::__1::shared_ptr<ComScore::Configuration>&&)
+	0x10227f190 ComScore!std::__1::__function::__func<ComScore::Core::newEventTask(std::__1::function<void (ComScore::Task*, std::__1::shared_ptr<ComScore::Configuration>)>)::$_28, std::__1::allocator<ComScore::Core::newEventTask(std::__1::function<void (ComScore::Task*, std::__1::shared_ptr<ComScore::Configuration>)>)::$_28>, void (ComScore::Task*)>::operator()(ComScore::Task*&&)
+	0x10223bc74 ComScore!ComScore::Task::run()
+	0x10225223c ComScore!ComScore::Core::consumeTimeWindowEvents()
+	0x102254650 ComScore!ComScore::Core::onConfigurationChanged(ComScore::ConfigurationType)
+	0x10224d2b4 ComScore!ComScore::Configuration::notifyConfigurationChanged(ComScore::ConfigurationType)
+	0x10224cb90 ComScore!ComScore::Configuration::initialize()
+
+Hooking native function stat64: /Applications/Cydia.app
+
+Hooking native function stat: /Applications/Cydia.app
+
+stat64 Bypass!!!
+
+stat Bypass!!!
+
+Hooking native function stat64: /bin/bash
+
+Hooking native function stat: /bin/bash
+
+stat64 Bypass!!!
+
+stat Bypass!!!
+
+
+[*] Class Name: ASIdentifierManager
+
+[*] Method Name: - advertisingIdentifier
+
+	[-] Type of return value: object
+
+	[-] Return Value: 00000000-0000-0000-0000-000000000000
+
+	Backtrace:
+	0x102494c34 DTBiOSSDK!-[DTBAdIdentifiers idfa]
+	0x1024a4670 DTBiOSSDK!-[DTBNetwork loadCommonParams:]
+	0x1024a3198 DTBiOSSDK!-[DTBNetwork formParameters:]
+	0x1024a34dc DTBiOSSDK!-[DTBNetwork makeLoadRequest]
+	0x1a540da84 libdispatch.dylib!_dispatch_call_block_and_release
+	0x1a540f81c libdispatch.dylib!_dispatch_client_callout
+	0x1a5412968 libdispatch.dylib!_dispatch_queue_override_invoke
+	0x1a5420fe0 libdispatch.dylib!_dispatch_root_queue_drain
+	0x1a54217d8 libdispatch.dylib!_dispatch_worker_thread2
+	0x1f14e6768 libsystem_pthread.dylib!_pthread_wqthread
+
+
+[*] Class Name: ASIdentifierManager
+
+[*] Method Name: - advertisingIdentifier
+
+	[-] Type of return value: object
+
+	[-] Return Value: 00000000-0000-0000-0000-000000000000
+
+	Backtrace:
+	0x102494c34 DTBiOSSDK!-[DTBAdIdentifiers idfa]
+	0x102495400 DTBiOSSDK!-[DTBAdIdentifiers frequencyCappingIdentifier]
+	0x1024a6edc DTBiOSSDK!-[DTBNetwork loadFrequencyCappingParameters:]
+	0x1024a3210 DTBiOSSDK!-[DTBNetwork formParameters:]
+	0x1024a34dc DTBiOSSDK!-[DTBNetwork makeLoadRequest]
+	0x1a540da84 libdispatch.dylib!_dispatch_call_block_and_release
+	0x1a540f81c libdispatch.dylib!_dispatch_client_callout
+	0x1a5412968 libdispatch.dylib!_dispatch_queue_override_invoke
+	0x1a5420fe0 libdispatch.dylib!_dispatch_root_queue_drain
+	0x1a54217d8 libdispatch.dylib!_dispatch_worker_thread2
+	0x1f14e6768 libsystem_pthread.dylib!_pthread_wqthread
+
+
+[*] Class Name: ASIdentifierManager
+
+[*] Method Name: - advertisingIdentifier
+
+	[-] Type of return value: object
+
+	[-] Return Value: 00000000-0000-0000-0000-000000000000
+
+
+[*] Class Name: UIDevice
+
+[*] Method Name: - batteryLevel
+
+	[-] Type of return value: object
+
+	[-] Return Value: <UIDevice: 0x282f2fac0>
+
+	Backtrace:
+	0x1001616f0 /private/var/containers/Bundle/Application/D2D23DEA-52A1-4D20-9EE9-0B54AC5439F7/tgnanativeApps.app/tgnanativeApps!-[BannerWrapperView applyLATParamsToDict:]
+	0x100160fdc /private/var/containers/Bundle/Application/D2D23DEA-52A1-4D20-9EE9-0B54AC5439F7/tgnanativeApps.app/tgnanativeApps!-[BannerWrapperView loadBanner]
+	0x100369cd0 tgnanativeApps!0x211cd0 (0x100211cd0)
+	0x100369dc8 tgnanativeApps!0x211dc8 (0x100211dc8)
+	0x1a540da84 libdispatch.dylib!_dispatch_call_block_and_release
+	0x1a540f81c libdispatch.dylib!_dispatch_client_callout
+	0x1a541dc70 libdispatch.dylib!_dispatch_main_queue_callback_4CF
+	0x1a579ca2c CoreFoundation!__CFRUNLOOP_IS_SERVICING_THE_MAIN_DISPATCH_QUEUE__
+	0x1a5796904 CoreFoundation!__CFRunLoopRun
+	0x1a57959f4 CoreFoundation!CFRunLoopRunSpecific
+	0x1bce66734 GraphicsServices!GSEventRunModal
+	0x1a821375c UIKitCore!-[UIApplication _run]
+	0x1a8218fcc UIKitCore!UIApplicationMain
+	0x1001636ec tgnanativeApps!0xb6ec (0x10000b6ec)
+	0x1a5451cf8 libdyld.dylib!start
+
+	Backtrace:
+	0x1004aaa10 tgnanativeApps!0x352a10 (0x100352a10)
+	0x1004aade8 tgnanativeApps!0x352de8 (0x100352de8)
+	0x1004d5bc4 tgnanativeApps!0x37dbc4 (0x10037dbc4)
+	0x1004d5618 tgnanativeApps!0x37d618 (0x10037d618)
+	0x100503c9c tgnanativeApps!0x3abc9c (0x1003abc9c)
+	0x10016f514 tgnanativeApps!0x17514 (0x100017514)
+	0x1a540da84 libdispatch.dylib!_dispatch_call_block_and_release
+	0x1a540f81c libdispatch.dylib!_dispatch_client_callout
+	0x1a5417004 libdispatch.dylib!_dispatch_lane_serial_drain
+	0x1a5417c00 libdispatch.dylib!_dispatch_lane_invoke
+	0x1a54224bc libdispatch.dylib!_dispatch_workloop_worker_thread
+	0x1f14e67a4 libsystem_pthread.dylib!_pthread_wqthread
+
+[!] frida hooking exception.
+
