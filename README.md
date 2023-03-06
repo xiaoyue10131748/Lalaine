@@ -1,18 +1,6 @@
 # Lalaine
-## Table of contents
-
-- [Quick start](#quick-start)
-- [Status](#status)
-- [What's included](#whats-included)
-- [Bugs and feature requests](#bugs-and-feature-requests)
-- [Contributing](#contributing)
-- [Creators](#creators)
-- [Thanks](#thanks)
-- [Copyright and license](#copyright-and-license)
-
 
 ## Enviroment requirement 
-
 - MacOS
 - A rooted iOS device
 
@@ -20,6 +8,8 @@
 - UI Automation
 - Sensive API Hooking
 - Network monitor
+- Inference (data, purpose) 
+- Compliance check
 
 ## Enviroment Setup
 ### UI Automation
@@ -42,15 +32,15 @@
 
 
 ## Usage
-### gather call trace and network traffic by dynamically exexuting an app in rooted device. 
+### Step one: gather call trace and network traffic by dynamically exexuting an app in rooted device. 
+- put the app binary code (.ipa) in the *app* folder *0*(you can create more folder to allow batch analysis). You can use ipatool to download app: <https://github.com/majd/ipatool>
 - launch macaca server to connects with device: `macaca server --verbose`
 - launch Fiddler to capture/decrypt Traffic from iOS Device: `Tools > Options > HTTPS and check Decrypt HTTPS traffic`
-- put the app binary code (.ipa) in the *app* folder
 - run the script to execute app and gather data: `python batch_ui_frida_test.py 0 .`
 
-### analyze call trace and network traffic to extract (data, purpose) from code behavior.
+### Step two: analyze call trace and network traffic to extract (data, purpose) from code behavior.
 - run the script `python analyze_log.py 0 .`
 
-### perform complaince check.
+### Step three: perform complaince check.
 - run the script `python compliance_check 0 .`
 
