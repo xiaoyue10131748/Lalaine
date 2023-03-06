@@ -49,8 +49,8 @@
 - run the script to execute app and gather data: `python batch_ui_frida_test.py 0 .`
 
 ### analyze call trace and network traffic to extract (data, purpose) from code behavior.
-- run the script ``
+- run the script `python analyze_log.py 0 .`
 
 ### perform complaince check.
-- run the script ``
+- run the script `python compliance_check 0 .`
 
