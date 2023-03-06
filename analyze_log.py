@@ -80,11 +80,12 @@ def generate_analyze_result(root,folder):
     generate_omit_file(output_file_omit,predict_file_omit)
 
     #find_inconsistency
+    '''
     final_inconsistency_file=root+"/result/"+folder+"/"+"inconsistency.xlsx"
     step_one(predict_file_incorr_inade)
     step_two(predict_file_omit)
     step_three(final_inconsistency_file)
-
+    '''
 
 #def compliance_check():
 
