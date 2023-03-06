@@ -42,10 +42,15 @@
 
 
 ## Usage
-### dynamic exexute an app in rooted device and gather call trace and network traffic
-Have a bug or a feature request? Please first read the [issue guidelines](https://reponame/blob/master/CONTRIBUTING.md) and search for existing and closed issues. If your problem or idea is not addressed yet, [please open a new issue](https://reponame/issues/new).
+### gather call trace and network traffic by dynamically exexuting an app in rooted device. 
+- launch macaca server to connects with device: `macaca server --verbose`
+- launch Fiddler to capture/decrypt Traffic from iOS Device: `Tools > Options > HTTPS and check Decrypt HTTPS traffic`
+- put the app binary code (.ipa) in the *app* folder
+- run the script to execute app and gather data: `python batch_ui_frida_test.py 0 .`
 
-### analyze call trace and network traffic to extract (data, purpose) from code behavior
+### analyze call trace and network traffic to extract (data, purpose) from code behavior.
+- run the script ``
 
-### perform complaince check
+### perform complaince check.
+- run the script ``
 
