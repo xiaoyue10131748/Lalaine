@@ -42,5 +42,6 @@
 - run the script `python analyze_log.py 0 .`
 
 ### Step three: perform complaince check.
+- download privacy label of apps we crawled from app store and put it under *data* folder: <https://drive.google.com/file/d/1k3FulkLvOhgLV_hU-hkxnuvnP4FF3tXz/view?usp=share_link>. If the app you want to test is not on the list, you can mannully add it to this file to allow further complaince check. 
 - run the script `python compliance_check 0 .`
 
