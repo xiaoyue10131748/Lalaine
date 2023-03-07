@@ -32,7 +32,7 @@
 
 
 ## Usage
-### Step zero: 
+### Step zero: enable environment
 - `cd Public/Lalaine/`
 - `source LalaineEnv/bin/activate`
 ### Step one: gather call trace and network traffic by dynamically exexuting an app in rooted device. 
