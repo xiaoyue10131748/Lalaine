@@ -133,7 +133,7 @@ def test_one_batch(app_input_path,bundleID,ipa,frida_output_path,ipa_name):
 		#os.system("tidevice kill " + bundleID)
 		#decrypted_app(bundleID)
 		print("prepare uninstall app ...")
-		uninstall(bundleID)
+		#uninstall(bundleID)
 		return True
 	
 

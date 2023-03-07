@@ -21,6 +21,7 @@ from network_parser import parse_raw_network
 import glob
 
 root=""
+PTAG="False"
 
 
 def merge(merge_root, total_file, folder_num):

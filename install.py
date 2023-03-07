@@ -1,7 +1,11 @@
 import os
 
+
+INSTALL=["./app/0/com.gannett.news.local.11AliveNews_461033172_v45.ipa"]
 def install(ipa):
-    print(ipa)
+    if ipa in INSTALL:
+        print("the app has been installed")
+        return 0
     #os.system("tidevice pair")
     cmd="ideviceinstaller -i " +ipa
     #cmd="tidevice install "  +ipa
