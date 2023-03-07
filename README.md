@@ -35,7 +35,7 @@
 ### Step zero: enable environment
 - `cd Public/Lalaine/`
 - `source LalaineEnv/bin/activate`
-### Step one: gather call trace and network traffic by dynamically exexuting an app in rooted device. 
+### Step one: gather call trace and network traffic by dynamically executing an app in rooted device. 
 - put the app binary code (.ipa) in the *app* folder *0*(you can create more folder to allow batch analysis). You can use ipatool to download app: <https://github.com/majd/ipatool>
 - launch macaca server to connects with device: `macaca server --verbose`
 - launch Fiddler to capture/decrypt Traffic from iOS Device: `Tools > Options > HTTPS and check Decrypt HTTPS traffic`
