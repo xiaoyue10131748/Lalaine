@@ -48,3 +48,6 @@
 - download privacy label of apps we crawled from app store and put it under *data* folder: <https://drive.google.com/file/d/1k3FulkLvOhgLV_hU-hkxnuvnP4FF3tXz/view?usp=share_link>. If the app you want to test is not on the list, you can mannully add it to this file to allow further complaince check. 
 - run the script `python compliance_check.py 0 .`
 
+## Other materials
+The other materials (e.g., l-data, privacy ontology,serverity break down, ect) can be found in <https://sites.google.com/view/privacylabel/home>
+
