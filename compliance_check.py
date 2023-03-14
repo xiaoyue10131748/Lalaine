@@ -9,9 +9,11 @@ from purpose_prediction.purpose_analyze import generate_omit_file
 from purpose_prediction.preprocess_incorr_inade_1 import *
 from purpose_prediction.preprocess_omit_2 import *
 from purpose_prediction.problems_3 import *
-
+import pandas as pd
 from network_parser import parse_raw_network
 import glob
+from IPython.display import display
+import pandas as pd
 
 
 def complaince_check(root,folder):
@@ -19,10 +21,15 @@ def complaince_check(root,folder):
     predict_file_omit=root+"/result/"+folder+"/"+"prediction_total_with_send_tag_prediction_omit_"+folder+".xlsx"
     #find_inconsistency
     final_inconsistency_file=root+"/result/"+folder+"/"+"inconsistency.xlsx"
-    step_one(predict_file_incorr_inade)
-    step_two(predict_file_omit)
-    step_three(final_inconsistency_file)
 
+    if not os.path.exists(final_inconsistency_file):
+        step_one(predict_file_incorr_inade)
+        step_two(predict_file_omit)
+        step_three(final_inconsistency_file)
+    
+    df=pd.read_excel(final_inconsistency_file)
+    display(df)
+    print("Find {} inconsistencies".format(len(df)))
 
 #def compliance_check():
 

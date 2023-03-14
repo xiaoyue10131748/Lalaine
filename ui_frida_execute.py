@@ -27,16 +27,15 @@ async def start_UI_crawler():
     #6baa682616264e25c65c25304fb3e1d95e56028a (se)
     #00008020-001564210E78002E (sultan)
     #066fe19b5c1523b4635d852bb9617969a0e384c6 (se 13.0)
-    p = await asyncio.create_subprocess_exec('/usr/local/lib/node_modules/nosmoke/bin/nosmoke', '-u', '5f8ed661a709152639f093cf45f09487595ff304',"-s")
+    p = await asyncio.create_subprocess_exec('/usr/local/lib/node_modules/nosmoke/bin/nosmoke', '-u', '5f8ed661a709152639f093cf45f09487595ff304',"-s" , stdout=asyncio.subprocess.PIPE)
     fut = p.communicate()
     try:
-        pcap_run = await asyncio.wait_for(fut, timeout=250)
+        pcap_run = await asyncio.wait_for(fut, timeout=180)
     except asyncio.TimeoutError:
         p.kill()
         await p.communicate()
-        print("ui crawler time out")
-        print("restart UI crawler")
-
+        print("ui crawler finished")
+ 
 
     '''
     try:
@@ -77,6 +76,7 @@ def frida_attach(device, bundleID):
 
 
 async def frida_process(bundleID,ROOT):  
+    print("analyzing in process, it will take 3 mins...")
     device = frida.get_usb_device(10)
     session = frida_attach(device, bundleID)
     print("executed")
@@ -88,6 +88,7 @@ async def frida_process(bundleID,ROOT):
     script.load()
     sys.stdin.read()
     session.detach()
+    print("analyzing in process...")
     sys.exit("detach...")
     
 
@@ -117,7 +118,7 @@ def signal_test(bundleID, ROOT):
     t.daemon = True
     t.start()
 
-    asyncio.run(print_process(100))
+    asyncio.run(print_process(200))
 
     try:
         asyncio.run(frida_process(bundleID,ROOT))

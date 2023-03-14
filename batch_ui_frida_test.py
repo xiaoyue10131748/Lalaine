@@ -14,6 +14,7 @@ import yaml
 import shutil
 import json
 import tqdm.asyncio
+import subprocess
 
 ROOT=""
 ## 读取yaml文件
@@ -90,7 +91,7 @@ def process(name):
 
 
 #280
-@time_out(250, timeout_callback)
+@time_out(200, timeout_callback)
 def test_one_app(bundleID):
 	try:
 		signal_test(bundleID,ROOT)
@@ -112,29 +113,42 @@ def write_bundleID_crawler_config(bundleID):
 	
         
 
+def is_installed(bundleID):
+	output = subprocess.run(["ideviceinstaller", "--list-apps"], capture_output=True)
+	#print (output)
+	#print(bundleID)
+	if bundleID in str(output):
+		return True
+	else:
+		return False
+	
+
 
 
 def test_one_batch(app_input_path,bundleID,ipa,frida_output_path,ipa_name):
-	status=install(app_input_path+ipa)
-	if status !=0:
-		print("install failed!!!!")
-		return False
+	print("Install the app ...")
+	if is_installed(bundleID):
+		print(bundleID+" successfully installed")
 	else:
-		time.sleep(1)
-		print("begin write to yaml file ...")
-		write_bundleID_crawler_config(bundleID)
-		print("finish write to yaml file ...")
-
-		time.sleep(1)
-		test_one_app(bundleID)
-		clean_up()
-		time.sleep(1)
-		print("prepare dump app ...")
-		#os.system("tidevice kill " + bundleID)
-		#decrypted_app(bundleID)
-		print("prepare uninstall app ...")
-		#uninstall(bundleID)
-		return True
+		status=install(app_input_path+ipa)
+		if status !=0:
+			print("install failed!!!!")
+			return False
+		
+	time.sleep(1)
+	print("begin write to yaml file ...")
+	write_bundleID_crawler_config(bundleID)
+	
+	time.sleep(1)
+	test_one_app(bundleID)
+	clean_up()
+	time.sleep(1)
+	print("prepare dump app ...")
+	#os.system("tidevice kill " + bundleID)
+	#decrypted_app(bundleID)
+	print("prepare uninstall app ...")
+	#uninstall(bundleID)
+	return True
 	
 
 
@@ -208,11 +222,11 @@ if __name__ == "__main__":
 		if ipa==".DS_Store":
 			continue
 		new_record={}
-		print(ipa)
+		#print(ipa)
 		start_time=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 		bundleID=get_bundle_id(ipa)	
 		ipa_name=ipa.split(".ipa")[0] + ".txt"
-		print(bundleID)
+		print("begin testing "+bundleID)
 
 		### based on frida output to check whether is app is been test
 		#if os.path.exists(frida_output_path + ipa_name):
@@ -223,8 +237,10 @@ if __name__ == "__main__":
 		if os.path.exists(log_file):
 			b_list=read_log_file(log_file)
 			if bundleID in b_list:
-				print("this ipa has been tested!!!")
-				continue
+				pass
+				##uncomment this if want to repeat testing
+				#print("this ipa has been tested!!!")
+				#continue
 
 
 		flag=test_one_batch(app_input_path,bundleID,ipa,frida_output_path,ipa_name)
@@ -259,7 +275,7 @@ if __name__ == "__main__":
 			new_record["frida_path"]=frida_output_path + ipa_name
 			write_json(new_record, log_file)
 
-			time.sleep(10)
+			time.sleep(3)
 		else:
 			with open(error_log, 'a+') as f:
 				f.write(bundleID + " :: intall failed...")
