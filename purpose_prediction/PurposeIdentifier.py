@@ -6,7 +6,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import missingno as mso
 import warnings
-import re
+import joblib
+import re,os
 from sklearn.preprocessing import LabelEncoder
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
@@ -263,10 +264,76 @@ def evaluate_test(clf, filename, output_filename,beat_vec, transformer, dom_vec)
     np.savetxt(filename.replace('.csv','')+'.lgbmclf.csv',pred,fmt = '%s')
     return bow_feat_encoded.shape[1],dom_feat_encoded.shape[1]
 
-def predict_purpose(src='./data/test.csv', dst='./data/test_results.csv'):
+
+
+
+
+def load_model(data,label,transformer,beat_vec,dom_vec,model_path):
+    if not os.path.exists(model_path):
+        # retrained and saved the model
+        # print(data.iloc[:3],label.iloc[:3])
+        ignore_cols = [x for x in data.columns if x not in cat_cols and x not in bow_cols and x not in num_cols]
+        cat_feat = data[cat_cols].astype(str)
+        # print(cat_feat)
+        cat_feat = cat_feat.apply(LabelEncoder().fit_transform)
+        num_feat = data[num_cols].astype(float)
+        dcn = pd.concat([cat_feat,num_feat ], axis=1)
+        dcn = dcn.fillna(0)
+        # label = data['purpose']
+        bow_feat = data[bow_cols].fillna('')
+        corpus = []
+        for i, feat in enumerate(bow_feat.iterrows()):
+            feats =[x for x in bow_feat.iloc[i]]
+            feats = ','.join(feats)
+            corpus.append(feats)
+        bow_feat_encoded = transformer.transform(beat_vec.transform(corpus)).toarray()
+        # print("Aggregated BOW Features:",len(vectorizer.vocabulary_.keys()))
+        dom_feat = data[dom_col]
+        dom_feat = dom_feat.fillna('')
+        dom_corpus = [x for x in dom_feat]
+
+        dom_feat_encoded = dom_vec.transform(dom_corpus).toarray()
+        # print("Domain Category BOW Features:",len(dom_vec.vocabulary_.keys()))
+        # print(dcn.shape,bow_feat_encoded.shape, dom_feat_encoded.shape)
+        # full_feat = np.concatenate([np.array(dcn),dom_feat_encoded], axis=1)
+
+        full_feat = np.concatenate([np.array(dcn), bow_feat_encoded,dom_feat_encoded], axis=1)
+        X,y = full_feat, label
+        y = y.replace('Developer Advertising or Marketing',"Developer's Advertising or Marketing")
+        print(y.value_counts())
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, stratify=y, shuffle=1, random_state=8)
+
+        lgbmclf = lgb.LGBMClassifier(colsample_bytree=1.0,
+                       importance_type='split', learning_rate=0.1, max_depth=10,
+                       min_child_samples=20, min_child_weight=0.001, min_split_gain=0.0,
+                       n_estimators=50, n_jobs=-1, num_leaves=50, objective=None,
+                       random_state=123, reg_alpha=0.0, reg_lambda=0.0, silent=True,
+                       subsample=1.0, subsample_for_bin=200000, subsample_freq=0,saved_feature_importance_type=1)
+        lgbmclf.fit(X_train, y_train)
+        # print("Train--LightGBM")
+        # metrix(y_train, lgbmclf.predict(X_train))
+        print("Test - LightGBM")
+        metrix(y_test, lgbmclf.predict(X_test))
+        joblib.dump(lgbmclf, model_path)
+
+    else:
+        # load model
+        lgbmclf = joblib.load(model_path)
+    return lgbmclf
+
+
+
+
+def predict_purpose(src='./data/test.csv', dst='./data/test_results.csv', retrain=False):
     beat_vec, transformer, dom_vec = fit_vectorizor(bow_feat,dom_feat)
-    lgbmclf= train_model(gt_x,gt_y,transformer,beat_vec,dom_vec)
-    bow_feat_dim, dom_feat_dim = evaluate_application(lgbmclf, src, dst,beat_vec, transformer, dom_vec)
+    if retrain:
+        lgbmclf= train_model(gt_x,gt_y,transformer,beat_vec,dom_vec)
+        bow_feat_dim, dom_feat_dim = evaluate_application(lgbmclf, src, dst,beat_vec, transformer, dom_vec)
+    else:
+        print(os.getcwd())
+        model_path="./purpose_prediction/model/lgb.pkl"
+        lgbmclf= load_model(gt_x,gt_y,transformer,beat_vec,dom_vec,model_path)
+        bow_feat_dim, dom_feat_dim = evaluate_application(lgbmclf, src, dst,beat_vec, transformer, dom_vec)
 
 
 #predict_purpose()

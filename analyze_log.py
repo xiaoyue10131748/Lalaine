@@ -23,7 +23,7 @@ from network_parser import parse_raw_network
 import glob
 
 root=""
-PTAG=True
+RETRAIN=True
 
 
 def merge(merge_root, total_file, folder_num):
@@ -82,29 +82,23 @@ def generate_analyze_result(root,folder):
     if not os.path.exists(prediction_path):
         os.makedirs(prediction_path)
 
-    if PTAG:
-        #extract features and predict purpose
-        predict_file_incorr_inade=prediction_path+"prediction_total_with_send_tag_incorr_inade_"+folder+".xlsx"
-        generate_analyze_file(output_file_incorr_inade,predict_file_incorr_inade)
-
-        predict_file_omit=prediction_path+"prediction_total_with_send_tag_prediction_omit_"+folder+".xlsx"
-        generate_omit_file(output_file_omit,predict_file_omit)
-
-    else:
-        predict_file_incorr_inade = prediction_path + "prediction_total_with_send_tag_incorr_inade_" + folder + ".xlsx"
-        df=prepare_analyze_file(output_file_incorr_inade)
-        feature_src=prediction_path+"feature_extraction_incorr_inade_"+ folder + ".csv"
-        df.to_csv(feature_src, index=False)
-        #feature_dst=prediction_path+"purpose_prediction_incorr_inade_"+ folder + ".csv"
-        predict_purpose(feature_src,predict_file_incorr_inade)
 
 
-        predict_file_omit = prediction_path+ "prediction_total_with_send_tag_prediction_omit_" + folder + ".xlsx"
-        df2 = prepare_omit_file(output_file_omit)
-        feature_src2 = prediction_path + "feature_extraction_omit_" + folder + ".csv"
-        df2.to_csv(feature_src2, index=False)
-        # feature_dst=prediction_path+"purpose_prediction_incorr_inade_"+ folder + ".csv"
-        predict_purpose(feature_src2, predict_file_omit)
+    predict_file_incorr_inade = prediction_path + "prediction_total_with_send_tag_incorr_inade_" + folder + ".xlsx"
+    df=prepare_analyze_file(output_file_incorr_inade)
+    feature_src=prediction_path+"feature_extraction_incorr_inade_"+ folder + ".csv"
+    df.to_csv(feature_src, index=False)
+    #feature_dst=prediction_path+"purpose_prediction_incorr_inade_"+ folder + ".csv"
+    predict_purpose(feature_src,predict_file_incorr_inade,RETRAIN)
+
+
+    predict_file_omit = prediction_path+ "prediction_total_with_send_tag_prediction_omit_" + folder + ".xlsx"
+    df2 = prepare_omit_file(output_file_omit)
+    feature_src2 = prediction_path + "feature_extraction_omit_" + folder + ".csv"
+    df2.to_csv(feature_src2, index=False)
+    # feature_dst=prediction_path+"purpose_prediction_incorr_inade_"+ folder + ".csv"
+    predict_purpose(feature_src2, predict_file_omit,RETRAIN)
+
 
 
 
