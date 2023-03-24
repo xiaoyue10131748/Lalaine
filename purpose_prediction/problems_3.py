@@ -71,6 +71,6 @@ def step_three(dst="'./data/problems.xlsx'"):
     df = df.sort_values(by=['id', 'type', 'data', 'purpose', 'actual'])
     df.to_excel(dst, index=False)
 
-    print('problems:', len(problems))
+    #print('problems:', len(problems))
     with open('./pickles/problems.pkl', 'wb') as f:
         pickle.dump(problems, f)

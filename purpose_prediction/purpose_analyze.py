@@ -4,7 +4,7 @@ import json
 import pandas as pd
 from purpose_prediction.utils_predict import predict_line
 from purpose_prediction.utils_traffic import ParsedURL, ParsedHeader, ParsedBody
-
+from purpose_prediction.post_process_train_test import complete_API_list_train
 
 TEST_FLAG = False
 BUNDLE_ID2INFO_PATH = './data/id2info.json'
@@ -290,6 +290,43 @@ def get_body_key_desc(src_list: list = ['./frida/jiale', './frida/feifan', '/Use
     df = df.sort_values(by=['bundle_id_len'], ascending=False)
     df.to_excel(dst, index=False, encoding='utf-8', engine='xlsxwriter')
     print('File {} generated'.format(dst))
+
+
+
+def prepare_analyze_file(src: str = './analyze/total_with_send_data_tag.xlsx'):
+    # df = pd.DataFrame(columns=COLUMNS)
+    df = extract_features_from_file(src, is_groundtruth=False, saved_columns=[
+                                    'bundle_id_list',
+                                    'className_list', 'API_list', 'return_list', 'invoke_list', 'url_list',
+                                    'request_header_list', 'requestBody_list', 'response_header_list',
+                                    'responseBody_list', 'note_list', 'matchRule', 'keyData',
+                                    'app_url_list', 'app_true_label', 'send_data_tag'], predict=True)
+
+    # df = df.drop_duplicates(subset=['request_header_list', 'requestBody_list',
+    # 'response_header_list', 'responseBody_list'], keep='first')
+    # df.to_excel(dst, index=False)
+    # df = pd.DataFrame(columns=COLUMNS)
+    #writer = pd.ExcelWriter(dst, engine='xlsxwriter', engine_kwargs={'options': {'strings_to_urls': False}})
+    #df.to_excel(writer, index=False)
+    #writer.save()
+
+    return complete_API_list_train(df)
+
+    #df.to_csv(dst+'.csv', index=False)
+    # df.to_excel(dst+'.xlsx', index=False)
+    #print('File {} generated'.format(dst))
+
+
+
+def prepare_omit_file(src: str = './analyze/omitDisclosure.xlsx', dst: str = './analyze/omit_test.xlsx'):
+    # omit_data_list
+    df = extract_features_from_file(src, is_groundtruth=False, saved_columns=[
+                                    'app_true_label', 'omit_data_list'], predict=True)
+    # df.to_excel(dst, index=False)
+
+    return complete_API_list_train(df)
+
+    #print('File {} generated'.format(dst))
 
 
 if __name__ == "__main__":
