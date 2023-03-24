@@ -17,11 +17,16 @@ import pandas as pd
 
 
 def complaince_check(root,folder):
-    predict_file_incorr_inade=root+"/result/"+folder+"/"+"prediction_total_with_send_tag_incorr_inade_"+folder+".xlsx"
-    predict_file_omit=root+"/result/"+folder+"/"+"prediction_total_with_send_tag_prediction_omit_"+folder+".xlsx"
-    #find_inconsistency
-    final_inconsistency_file=root+"/result/"+folder+"/"+"inconsistency.xlsx"
+    prediction_path = root + "/result/" + folder + "/prediction_output/"
+    predict_file_incorr_inade = prediction_path + "prediction_total_with_send_tag_incorr_inade_" + folder + ".xlsx"
+    predict_file_omit=prediction_path+"prediction_total_with_send_tag_prediction_omit_"+folder+".xlsx"
 
+    #find_inconsistency
+    inconsistency_path =  root + "/result/" + folder + "/inconsistency_output/"
+    if not os.path.exists(inconsistency_path):
+        os.makedirs(inconsistency_path)
+
+    final_inconsistency_file=inconsistency_path+"inconsistency.xlsx"
     if not os.path.exists(final_inconsistency_file):
         step_one(predict_file_incorr_inade)
         step_two(predict_file_omit)

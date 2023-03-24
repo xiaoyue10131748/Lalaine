@@ -12,7 +12,9 @@ from analyzeUtils.analyzeByAPI import match_by_API
 from analyzeUtils.analyzeByKey import match_by_KEY
 from purpose_prediction.purpose_analyze import generate_analyze_file
 from purpose_prediction.purpose_analyze import generate_omit_file
-
+from purpose_prediction.purpose_analyze import prepare_analyze_file
+from purpose_prediction.purpose_analyze import prepare_omit_file
+from purpose_prediction.PurposeIdentifier import predict_purpose
 from purpose_prediction.preprocess_incorr_inade_1 import *
 from purpose_prediction.preprocess_omit_2 import *
 from purpose_prediction.problems_3 import *
@@ -21,7 +23,7 @@ from network_parser import parse_raw_network
 import glob
 
 root=""
-PTAG="False"
+PTAG=True
 
 
 def merge(merge_root, total_file, folder_num):
@@ -67,18 +69,45 @@ def generate_analyze_result(root,folder):
     merge(root+"/result/", total_file, folder)
 
     #append privacy label in apple store
-    output_file_incorr_inade=root+"/result/"+folder+"/"+"total_with_send_tag_"+folder+".xlsx"
+    alignment_path = root + "/result/" + folder + "/alignment_output/"
+    if not os.path.exists(alignment_path):
+        os.makedirs(alignment_path)
+    output_file_incorr_inade=alignment_path+"total_with_send_tag_"+folder+".xlsx"
     append_privacy_Label_incorr_inade(total_file, output_file_incorr_inade)
 
-    output_file_omit=root+"/result/"+folder+"/"+"total_with_send_tag_neglect"+folder+".xlsx"
+    output_file_omit=alignment_path+"total_with_send_tag_neglect"+folder+".xlsx"
     append_privacy_Label_omit(total_file,output_file_omit)
 
-    #extract features and predict purpose
-    predict_file_incorr_inade=root+"/result/"+folder+"/"+"prediction_total_with_send_tag_incorr_inade_"+folder+".xlsx"
-    generate_analyze_file(output_file_incorr_inade,predict_file_incorr_inade)
+    prediction_path = root + "/result/" + folder + "/prediction_output/"
+    if not os.path.exists(prediction_path):
+        os.makedirs(prediction_path)
 
-    predict_file_omit=root+"/result/"+folder+"/"+"prediction_total_with_send_tag_prediction_omit_"+folder+".xlsx"
-    generate_omit_file(output_file_omit,predict_file_omit)
+    if PTAG:
+        #extract features and predict purpose
+        predict_file_incorr_inade=prediction_path+"prediction_total_with_send_tag_incorr_inade_"+folder+".xlsx"
+        generate_analyze_file(output_file_incorr_inade,predict_file_incorr_inade)
+
+        predict_file_omit=prediction_path+"prediction_total_with_send_tag_prediction_omit_"+folder+".xlsx"
+        generate_omit_file(output_file_omit,predict_file_omit)
+
+    else:
+        predict_file_incorr_inade = prediction_path + "prediction_total_with_send_tag_incorr_inade_" + folder + ".xlsx"
+        df=prepare_analyze_file(output_file_incorr_inade)
+        feature_src=prediction_path+"feature_extraction_incorr_inade_"+ folder + ".csv"
+        df.to_csv(feature_src, index=False)
+        #feature_dst=prediction_path+"purpose_prediction_incorr_inade_"+ folder + ".csv"
+        predict_purpose(feature_src,predict_file_incorr_inade)
+
+
+        predict_file_omit = prediction_path+ "prediction_total_with_send_tag_prediction_omit_" + folder + ".xlsx"
+        df2 = prepare_omit_file(output_file_omit)
+        feature_src2 = prediction_path + "feature_extraction_omit_" + folder + ".csv"
+        df2.to_csv(feature_src2, index=False)
+        # feature_dst=prediction_path+"purpose_prediction_incorr_inade_"+ folder + ".csv"
+        predict_purpose(feature_src2, predict_file_omit)
+
+
+
 
     #find_inconsistency
     '''
