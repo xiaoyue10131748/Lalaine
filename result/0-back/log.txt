@@ -1,1 +1,0 @@
-{"bundleID": "com.gannett.news.local.11AliveNews", "start_time": "2023-03-06 22:14:25", "end_time": "2023-03-06 22:18:38", "ipa_path": "./app/0/com.gannett.news.local.11AliveNews_461033172_v45.ipa", "frida_path": "./result/0/frida_output/com.gannett.news.local.11AliveNews_461033172_v45.txt"}
