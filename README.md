@@ -33,7 +33,9 @@
 
 ## Usage
 ### Step zero: setup python environment
-- Python 3.10.10
+- install Python 3.10.10
+- `python3.10 -m venv LalaineEnv` 
+- `source LalaineEnv/bin/activate` 
 - `pip install -r requirements.txt`
 ### Step one: gather call trace and network traffic by dynamically executing an app in rooted device. 
 - put the app binary code (.ipa) in the *app* folder *0*(you can create more folder to allow batch analysis). You can use ipatool to download app: <https://github.com/majd/ipatool>
