@@ -48,8 +48,8 @@
 - run the script `python analyze_log.py -d .  -n 0`
 - More parameters are detailed as follows:
 - > options:
-  -h, --help            show this help message and exit \n
-  -d DIC, --dic DIC     [Required] specify the repo directory, the default is current directory  \n
+  > -h, --help            show this help message and exit 
+  > -d DIC, --dic DIC     [Required] specify the repo directory, the default is current directory  
   -n FOLDER, --folder FOLDER
                         [Required] specify which folder your test app in
   -m MODEL, --model MODEL
