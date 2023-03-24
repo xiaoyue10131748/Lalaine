@@ -2,8 +2,6 @@
 
 [*] Entering getifaddrs
 
-[*] Entering getifaddrs
-
 	Backtrace:
 	0x1bd361920 libsystem_info.dylib!if_indextoname
 	0x1be836a78 libnetwork.dylib!nw_interface_create_with_index
@@ -26,17 +24,17 @@
 
 Interface name: en0 Address: fe80:0000:0000:0000:1c7a:a15d:13a7:fc17
 
-Interface name: en0 Address: 192.168.1.232
-
-Interface name: en0 Address: fdd4:7bbd:7c4c:40a4:1ca0:f720:ba67:6c29
-
-Interface name: en0 Address: fdd4:7bbd:7c4c:40a4:116b:6b9a:0e2f:d987
-
 Interface name: en0 Address: 2600:1702:3840:6970:08b8:9415:d58b:9835
 
-Interface name: en0 Address: 2600:1702:3840:6970:7d83:b22d:fdb2:1eb3
+Interface name: en0 Address: 2600:1702:3840:6970:9866:0f0e:e85b:a788
 
-Interface name: awdl0 Address: fe80:0000:0000:0000:1452:b6ff:fe50:f5d1
+Interface name: en0 Address: 192.168.1.232
+
+Interface name: en0 Address: 2600:1702:3840:6970:78a5:d405:a8a9:04e9
+
+Interface name: en0 Address: 2600:1702:3840:6970:0000:0000:0000:0048
+
+Interface name: awdl0 Address: fe80:0000:0000:0000:14f9:5dff:fe26:7f04
 
 Interface name: en2 Address: fe80:0000:0000:0000:1c4e:5716:3bb9:45b6
 
@@ -44,47 +42,31 @@ Interface name: en2 Address: 169.254.8.50
 
 Interface name: utun0 Address: fe80:0000:0000:0000:4c3d:d525:e06c:f87e
 
-[*] Entering getifaddrs
+
+[*] Class Name: ASIdentifierManager
+
+[*] Method Name: - advertisingIdentifier
+
+	[-] Type of return value: object
+
+	[-] Return Value: 63D56BFA-7EF8-4CC2-9280-6320991D020B
 
 	Backtrace:
-	0x1bd361920 libsystem_info.dylib!if_indextoname
-	0x1be836a78 libnetwork.dylib!nw_interface_create_with_index
-	0x1be7d2af8 libnetwork.dylib!nw_endpoint_handler_get_alternate_path_state
-	0x1be7d240c libnetwork.dylib!__nw_endpoint_handler_initialize_association_block_invoke
-	0x1be85aefc libnetwork.dylib!__nw_association_update_paths_block_invoke.73
-	0x1be9033c8 libnetwork.dylib!nw_hash_table_apply
-	0x1be85aafc libnetwork.dylib!nw_association_update_paths
-	0x1be9bb5a8 libnetwork.dylib!nw_path_necp_update_evaluator
-	0x1be9bae94 libnetwork.dylib!nw_path_necp_check_for_updates
-	0x1be9c8574 libnetwork.dylib!nw_path_evaluator_force_update
-	0x1be85cdfc libnetwork.dylib!nw_association_force_update
-	0x1be740338 libnetwork.dylib!nw_endpoint_flow_setup_channel
-	0x1be73c11c libnetwork.dylib!-[NWConcrete_nw_endpoint_flow startWithHandler:]
-	0x1be7d61ec libnetwork.dylib!nw_endpoint_handler_path_change
-	0x1be7daeb0 libnetwork.dylib!nw_endpoint_handler_start
-	0x1be771d40 libnetwork.dylib!nw_endpoint_proxy_start_next_child
-
-[*] Leaving getifaddrs
-
-Interface name: en0 Address: fe80:0000:0000:0000:1c7a:a15d:13a7:fc17
-
-Interface name: en0 Address: 192.168.1.232
-
-Interface name: en0 Address: fdd4:7bbd:7c4c:40a4:1ca0:f720:ba67:6c29
-
-Interface name: en0 Address: fdd4:7bbd:7c4c:40a4:116b:6b9a:0e2f:d987
-
-Interface name: en0 Address: 2600:1702:3840:6970:08b8:9415:d58b:9835
-
-Interface name: en0 Address: 2600:1702:3840:6970:7d83:b22d:fdb2:1eb3
-
-Interface name: awdl0 Address: fe80:0000:0000:0000:1452:b6ff:fe50:f5d1
-
-Interface name: en2 Address: fe80:0000:0000:0000:1c4e:5716:3bb9:45b6
-
-Interface name: en2 Address: 169.254.8.50
-
-Interface name: utun0 Address: fe80:0000:0000:0000:4c3d:d525:e06c:f87e
+	0x1030569fc tgnanativeApps!0x8ce9fc (0x1008ce9fc)
+	0x103056b2c tgnanativeApps!0x8ceb2c (0x1008ceb2c)
+	0x10309cca4 /var/containers/Bundle/Application/A31A565C-30AE-49BA-AE27-7E4879347244/tgnanativeApps.app/tgnanativeApps!-[GADApplication testModeEnabled]
+	0x1030f83c4 tgnanativeApps!0x9703c4 (0x1009703c4)
+	0x1030972a8 tgnanativeApps!0x90f2a8 (0x10090f2a8)
+	0x10309883c tgnanativeApps!0x91083c (0x10091083c)
+	0x103098f68 tgnanativeApps!0x910f68 (0x100910f68)
+	0x103096c88 tgnanativeApps!0x90ec88 (0x10090ec88)
+	0x1030e2b5c tgnanativeApps!0x95ab5c (0x10095ab5c)
+	0x1bd264a38 libdispatch.dylib!_dispatch_call_block_and_release
+	0x1bd2657d4 libdispatch.dylib!_dispatch_client_callout
+	0x1bd23c89c libdispatch.dylib!_dispatch_queue_override_invoke
+	0x1bd2489d4 libdispatch.dylib!_dispatch_root_queue_drain
+	0x1bd249248 libdispatch.dylib!_dispatch_worker_thread2
+	0x1bd4451b4 libsystem_pthread.dylib!_pthread_wqthread
 
 
 [*] Class Name: UIDevice
@@ -93,102 +75,25 @@ Interface name: utun0 Address: fe80:0000:0000:0000:4c3d:d525:e06c:f87e
 
 	[-] Type of return value: object
 
-	[-] Return Value: <UIDevice: 0x28149c400>
+	[-] Return Value: <UIDevice: 0x280759420>
 
 	Backtrace:
-	0x102f56f2c TealiumIOS!+[TEALDeviceDataSources batteryLevelAsPercentString]
-	0x102f56290 TealiumIOS!-[TEALDeviceDataSources mainThreadDataSources]
-	0x102f386a0 TealiumIOS!-[TEALDataSources mainThreadDataSources]
-	0x102f4058c TealiumIOS!-[Tealium captureTimeDataSourcesForType:title:]
-	0x102f3faac TealiumIOS!-[Tealium trackType:title:dataSources:completion:]
-	0x102f3f974 TealiumIOS!-[Tealium trackEventWithTitle:dataSources:]
-	0x100ed8d38 /var/containers/Bundle/Application/A31A565C-30AE-49BA-AE27-7E4879347244/tgnanativeApps.app/tgnanativeApps!-[TealiumModule trackEventForInstance:event:data:]
-	0x1bd82bba0 CoreFoundation!__invoking___
-	0x1bd70dc90 CoreFoundation!-[NSInvocation invoke]
-	0x1bd70e8c4 CoreFoundation!-[NSInvocation invokeWithTarget:]
-	0x100dacb7c /var/containers/Bundle/Application/A31A565C-30AE-49BA-AE27-7E4879347244/tgnanativeApps.app/tgnanativeApps!-[RCTModuleMethod invokeWithBridge:module:arguments:]
-	0x100daf014 tgnanativeApps!0x1eb014 (0x1001eb014)
-	0x100daec4c tgnanativeApps!0x1eac4c (0x1001eac4c)
-	0x1bd264a38 libdispatch.dylib!_dispatch_call_block_and_release
-	0x1bd2657d4 libdispatch.dylib!_dispatch_client_callout
-	0x1bd240dec libdispatch.dylib!_dispatch_lane_serial_drain$VARIANT$armv81
-
-[!] frida hooking exception.
-
-[!] frida hooking exception.
-
-[*] Started: Modify Return Value
-
-[*] Entering getifaddrs
-
-[*] Entering getifaddrs
-
-	Backtrace:
-	0x1bd361920 libsystem_info.dylib!if_indextoname
-	0x1be836a78 libnetwork.dylib!nw_interface_create_with_index
-	0x1be7d2af8 libnetwork.dylib!nw_endpoint_handler_get_alternate_path_state
-	0x1be7d240c libnetwork.dylib!__nw_endpoint_handler_initialize_association_block_invoke
-	0x1be85aefc libnetwork.dylib!__nw_association_update_paths_block_invoke.73
-	0x1be9033c8 libnetwork.dylib!nw_hash_table_apply
-	0x1be85aafc libnetwork.dylib!nw_association_update_paths
-	0x1be9bb5a8 libnetwork.dylib!nw_path_necp_update_evaluator
-	0x1be9bae94 libnetwork.dylib!nw_path_necp_check_for_updates
-	0x1be9c8574 libnetwork.dylib!nw_path_evaluator_force_update
-	0x1be85cdfc libnetwork.dylib!nw_association_force_update
-	0x1be740338 libnetwork.dylib!nw_endpoint_flow_setup_channel
-	0x1be73c11c libnetwork.dylib!-[NWConcrete_nw_endpoint_flow startWithHandler:]
-	0x1be7d61ec libnetwork.dylib!nw_endpoint_handler_path_change
-	0x1be7daeb0 libnetwork.dylib!nw_endpoint_handler_start
-	0x1be771d40 libnetwork.dylib!nw_endpoint_proxy_start_next_child
-
-[*] Leaving getifaddrs
-
-Interface name: en0 Address: fe80:0000:0000:0000:1c7a:a15d:13a7:fc17
-
-Interface name: en0 Address: 192.168.1.232
-
-Interface name: en0 Address: fdd4:7bbd:7c4c:40a4:1ca0:f720:ba67:6c29
-
-Interface name: en0 Address: fdd4:7bbd:7c4c:40a4:116b:6b9a:0e2f:d987
-
-Interface name: en0 Address: 2600:1702:3840:6970:08b8:9415:d58b:9835
-
-Interface name: en0 Address: 2600:1702:3840:6970:7d83:b22d:fdb2:1eb3
-
-Interface name: awdl0 Address: fe80:0000:0000:0000:1452:b6ff:fe50:f5d1
-
-Interface name: en2 Address: fe80:0000:0000:0000:1c4e:5716:3bb9:45b6
-
-Interface name: en2 Address: 169.254.8.50
-
-Interface name: utun0 Address: fe80:0000:0000:0000:4c3d:d525:e06c:f87e
-
-
-[*] Class Name: UIDevice
-
-[*] Method Name: - batteryLevel
-
-	[-] Type of return value: object
-
-	[-] Return Value: <UIDevice: 0x281edd500>
-
-	Backtrace:
-	0x10671af2c TealiumIOS!+[TEALDeviceDataSources batteryLevelAsPercentString]
-	0x10671a290 TealiumIOS!-[TEALDeviceDataSources mainThreadDataSources]
-	0x1066fc6a0 TealiumIOS!-[TEALDataSources mainThreadDataSources]
-	0x10670458c TealiumIOS!-[Tealium captureTimeDataSourcesForType:title:]
-	0x106703aac TealiumIOS!-[Tealium trackType:title:dataSources:completion:]
-	0x106703974 TealiumIOS!-[Tealium trackEventWithTitle:dataSources:]
-	0x104698d38 /var/containers/Bundle/Application/A31A565C-30AE-49BA-AE27-7E4879347244/tgnanativeApps.app/tgnanativeApps!-[TealiumModule trackEventForInstance:event:data:]
-	0x1bd82bba0 CoreFoundation!__invoking___
-	0x1bd70dc90 CoreFoundation!-[NSInvocation invoke]
-	0x1bd70e8c4 CoreFoundation!-[NSInvocation invokeWithTarget:]
-	0x10456cb7c /var/containers/Bundle/Application/A31A565C-30AE-49BA-AE27-7E4879347244/tgnanativeApps.app/tgnanativeApps!-[RCTModuleMethod invokeWithBridge:module:arguments:]
-	0x10456f014 tgnanativeApps!0x1eb014 (0x1001eb014)
-	0x10456ec4c tgnanativeApps!0x1eac4c (0x1001eac4c)
-	0x1bd264a38 libdispatch.dylib!_dispatch_call_block_and_release
-	0x1bd2657d4 libdispatch.dylib!_dispatch_client_callout
-	0x1bd240dec libdispatch.dylib!_dispatch_lane_serial_drain$VARIANT$armv81
+	0x102ff21dc tgnanativeApps!0x86a1dc (0x10086a1dc)
+	0x102ff66d8 tgnanativeApps!0x86e6d8 (0x10086e6d8)
+	0x102ff7694 tgnanativeApps!0x86f694 (0x10086f694)
+	0x10302e518 tgnanativeApps!0x8a6518 (0x1008a6518)
+	0x1030a35f0 tgnanativeApps!0x91b5f0 (0x10091b5f0)
+	0x10302e344 /var/containers/Bundle/Application/A31A565C-30AE-49BA-AE27-7E4879347244/tgnanativeApps.app/tgnanativeApps!-[GADAdLifecycleEventPingMonitor pingURLStrings:analyticsEvent:context:]
+	0x10302df24 tgnanativeApps!0x8a5f24 (0x1008a5f24)
+	0x1030c3748 tgnanativeApps!0x93b748 (0x10093b748)
+	0x1be1a6570 Foundation!-[__NSObserver _doit:]
+	0x1bd7955bc CoreFoundation!__CFNOTIFICATIONCENTER_IS_CALLING_OUT_TO_AN_OBSERVER__
+	0x1bd795588 CoreFoundation!___CFXRegistrationPost_block_invoke
+	0x1bd794a7c CoreFoundation!_CFXRegistrationPost
+	0x1bd794728 CoreFoundation!___CFXNotificationPost_block_invoke
+	0x1bd70e524 CoreFoundation!-[_CFXNotificationRegistrar find:object:observer:enumerator:]
+	0x1bd7941d8 CoreFoundation!_CFXNotificationPost
+	0x1be17c814 Foundation!-[NSNotificationCenter postNotificationName:object:userInfo:]
 
 [!] frida hooking exception.
 
