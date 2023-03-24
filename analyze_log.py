@@ -6,6 +6,7 @@ import xlsxwriter
 import pandas as pd
 import sys
 import openpyxl
+import argparse
 from analyzeUtils.append_privacy_Label_incorr_inade import append_privacy_Label_incorr_inade
 from analyzeUtils.append_privacy_Label_omit import append_privacy_Label_omit
 from analyzeUtils.analyzeByAPI import match_by_API
@@ -23,7 +24,7 @@ from network_parser import parse_raw_network
 import glob
 
 root=""
-RETRAIN=True
+#RETRAIN=True
 
 
 def merge(merge_root, total_file, folder_num):
@@ -56,10 +57,13 @@ def merge(merge_root, total_file, folder_num):
     writer.close()
 
 
+def is_dir_empty(dir_path):
+    print(dir_path)
+    return not bool(os.listdir(dir_path))
 
-def generate_analyze_result(root,folder):
+def generate_analyze_result(root,folder,RETRAIN, har_path):
+
     #parse raw network from har
-    har_path="/Users/xiaoyue-admin/Documents/Fiddler2/Captures/har"
     parse_raw_network(root, folder, har_path)
 
     #map call trace with network traffic
@@ -82,8 +86,6 @@ def generate_analyze_result(root,folder):
     if not os.path.exists(prediction_path):
         os.makedirs(prediction_path)
 
-
-
     predict_file_incorr_inade = prediction_path + "prediction_total_with_send_tag_incorr_inade_" + folder + ".xlsx"
     df=prepare_analyze_file(output_file_incorr_inade)
     feature_src=prediction_path+"feature_extraction_incorr_inade_"+ folder + ".csv"
@@ -102,19 +104,36 @@ def generate_analyze_result(root,folder):
 
 
 
-
-    #find_inconsistency
-    '''
-    final_inconsistency_file=root+"/result/"+folder+"/"+"inconsistency.xlsx"
-    step_one(predict_file_incorr_inade)
-    step_two(predict_file_omit)
-    step_three(final_inconsistency_file)
-    '''
-
-#def compliance_check():
-
-
 if __name__ == '__main__':
-    folder = sys.argv[1]
-    root = sys.argv[2]
-    generate_analyze_result(root,folder)
+
+    parser = argparse.ArgumentParser(description="Please specify the parameters")
+    #parser.add_argument("-H", "--Help", help="Example: Help argument", required=False, default="")
+    parser.add_argument("-d", "--dic", help="specify the repo directory, the default is current directory", required=True, default=".")
+    parser.add_argument("-n", "--folder", help="specify which folder your test app in", required=True, default="0")
+    parser.add_argument("-m", "--model", help="specify whether to retrain the model", required=False, default=False)
+    parser.add_argument("-t", "--traffic", help="specify the network traffic file saved in fiddler", required=False, default="")
+
+
+    argument = parser.parse_args()
+    status = False
+
+    if argument.dic:
+        print("You have used '-d' or '--dic' with argument: {0}".format(argument.dic))
+        status = True
+    if argument.folder:
+        print("You have used '-n' or '--folder' with argument: {0}".format(argument.folder))
+        status = True
+    if argument.model:
+        print("You have used '-m' or '--model' with argument: {0}".format(argument.model))
+        status = True
+    if argument.traffic:
+        print("You have used '-t' or '--traffic' with argument: {0}".format(argument.traffic))
+        status = True
+    if not status:
+        print("Maybe you want to use -d or -n or -m?")
+
+    network_path = argument.dic + '/result/' + str(argument.folder) + "/har/"
+    if is_dir_empty(network_path):
+        print("Please specify the network traffic file by using -t ")
+
+    generate_analyze_result(argument.dic,argument.folder,argument.model,argument.traffic)

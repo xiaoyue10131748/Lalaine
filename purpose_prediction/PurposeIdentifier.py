@@ -330,7 +330,6 @@ def predict_purpose(src='./data/test.csv', dst='./data/test_results.csv', retrai
         lgbmclf= train_model(gt_x,gt_y,transformer,beat_vec,dom_vec)
         bow_feat_dim, dom_feat_dim = evaluate_application(lgbmclf, src, dst,beat_vec, transformer, dom_vec)
     else:
-        print(os.getcwd())
         model_path="./purpose_prediction/model/lgb.pkl"
         lgbmclf= load_model(gt_x,gt_y,transformer,beat_vec,dom_vec,model_path)
         bow_feat_dim, dom_feat_dim = evaluate_application(lgbmclf, src, dst,beat_vec, transformer, dom_vec)

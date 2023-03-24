@@ -72,11 +72,11 @@ def get_raw_har(network_path,har_path):
 
 
 def parse_raw_network(root,folder,har_path):
-
     log_file = root+'/result/' + str(folder) + '/log.txt'
     network_path = root+'/result/' + str(folder) + "/har/"
     network_output_path = root+'/result/'+ str(folder) + "/network_output/"
-    get_raw_har(network_path, har_path)
+    if not os.path.exists(network_path):
+        get_raw_har(network_path, har_path)
     # 判断 network output folder 是否存在
     if not os.path.exists(network_output_path):
         os.makedirs(network_output_path)
