@@ -2,6 +2,7 @@
 
 ## Enviroment requirement 
 - MacOS
+- Xcode 13
 - A rooted iOS device
 
 ## What's included in dynamic anlaysis pipeline
