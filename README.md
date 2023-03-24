@@ -45,10 +45,10 @@
 - run the script to execute app and gather data: `python batch_ui_frida_test.py 0 .`
 
 ### Step two: analyze call trace and network traffic to extract (data, purpose) from code behavior.
-- run the script `python analyze_log.py -d .  -n 0`
+- Run the script `python analyze_log.py -d .  -n 0`
 - More parameters are detailed as follows:
 <img width="628" alt="image" src="https://user-images.githubusercontent.com/38227314/227628542-4248517d-38cc-42e3-9927-55065dfef037.png">
-- Analyzing result can be found in *result/0/prediction_output/*
+- Analyzing result can be found in **./result/0/prediction_output/**
 
 ### Step three: perform compliance check.
 - download privacy label of apps we crawled from app store and put it under *data* folder: <https://drive.google.com/file/d/1k3FulkLvOhgLV_hU-hkxnuvnP4FF3tXz/view?usp=share_link>. If the app you want to test is not on the list, you can mannully add it to this file to allow further complaince check. 
