@@ -44,7 +44,7 @@
 - run the script to execute app and gather data: `python batch_ui_frida_test.py 0 .`
 
 ### Step two: analyze call trace and network traffic to extract (data, purpose) from code behavior.
-- run the script `python analyze_log.py -d "."  -n 0`
+- run the script `python analyze_log.py -d .  -n 0`
 - More parameters are detailed as follows:
   <img width="628" alt="image" src="https://user-images.githubusercontent.com/38227314/227628542-4248517d-38cc-42e3-9927-55065dfef037.png">
 
