@@ -39,11 +39,14 @@
 - `source LalaineEnv/bin/activate` 
 - `pip install -r requirements.txt`
 ### Step one: gather call trace and network traffic by dynamically executing an app in rooted device. 
-- put the app binary code (.ipa) in the *app* folder *0*(you can create more folder to allow batch analysis). You can use ipatool to download app: <https://github.com/majd/ipatool>
-- launch macaca server to connects with device: `macaca server --verbose`
-- launch Fiddler to capture/decrypt Traffic from iOS Device: `Tools > Options > HTTPS and check Decrypt HTTPS traffic`
-- run the script to execute app and gather data: `python batch_ui_frida_test.py 0 .`
-- save the network traffic under the default path **./result/0/har/**; If you save it in other folder, you need specify it when run analyze_log.py
+- Put the app binary code (.ipa) in the *app* folder *0*(you can create more folder to allow batch analysis). You can use ipatool to download app: <https://github.com/majd/ipatool>
+- Launch macaca server to connects with device: `macaca server --verbose`
+- Launch Fiddler to capture/decrypt Traffic from iOS Device: `Tools > Options > HTTPS and check Decrypt HTTPS traffic`, after finishing the dynamic testing, save the network traffic under the default path **./result/0/har/**; (If you save it in other folder, you need specify it when run analyze_log.py)
+- Obtain your iOS device ID by runing `xcrun xctrace list devices`
+- Run the script to execute app and gather data: `python batch_ui_frida_test.py -d . -n 0 -i <device id>`
+- Options:
+- <img width="630" alt="image" src="https://user-images.githubusercontent.com/38227314/227680270-f0811749-bbf0-4bfa-999b-13f82ad0b47b.png">
+
 
 ### Step two: analyze call trace and network traffic to extract (data, purpose) from code behavior.
 - Run the script `python analyze_log.py -d .  -n 0`
