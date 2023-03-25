@@ -14,7 +14,7 @@ from network_parser import parse_raw_network
 import glob
 from IPython.display import display
 import pandas as pd
-
+import argparse
 
 def complaince_check(root,folder):
     prediction_path = root + "/result/" + folder + "/prediction_output/"
@@ -40,6 +40,22 @@ def complaince_check(root,folder):
 
 
 if __name__ == '__main__':
-    folder = sys.argv[1]
-    root = sys.argv[2]
-    complaince_check(root,folder)
+    parser = argparse.ArgumentParser(description="Please specify the parameters")
+    #parser.add_argument("-H", "--Help", help="Example: Help argument", required=False, default="")
+    parser.add_argument("-d", "--dic", help="[Required] specify the repo directory, the default is current directory", required=True, default=".")
+    parser.add_argument("-n", "--folder", help="[Required] specify which folder your test app in", required=True, default="0")
+
+    argument = parser.parse_args()
+    status = False
+
+    if argument.dic:
+        print("You have used '-d' or '--dic' with argument: {0}".format(argument.dic))
+        status = True
+    if argument.folder:
+        print("You have used '-n' or '--folder' with argument: {0}".format(argument.folder))
+        status = True
+
+    if not status:
+        print("Maybe you want to use -d or -n or -m?")
+
+    complaince_check(argument.dic,argument.folder)
