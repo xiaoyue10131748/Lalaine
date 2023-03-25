@@ -108,10 +108,10 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description="Please specify the parameters")
     #parser.add_argument("-H", "--Help", help="Example: Help argument", required=False, default="")
-    parser.add_argument("-d", "--dic", help="specify the repo directory, the default is current directory", required=True, default=".")
-    parser.add_argument("-n", "--folder", help="specify which folder your test app in", required=True, default="0")
+    parser.add_argument("-d", "--dic", help="[Required] specify the repo directory, the default is current directory", required=True, default=".")
+    parser.add_argument("-n", "--folder", help="[Required] specify which folder your test app in", required=True, default="0")
     parser.add_argument("-m", "--model", help="specify whether to retrain the model", required=False, default=False)
-    parser.add_argument("-t", "--traffic", help="specify the network traffic file saved in fiddler", required=False, default="")
+    parser.add_argument("-t", "--traffic", help="specify the network traffic file saved in fiddler,default is './result/0/har/'", required=False, default="")
 
 
     argument = parser.parse_args()

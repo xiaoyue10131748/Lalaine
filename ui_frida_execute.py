@@ -20,14 +20,15 @@ logging.basicConfig(
     )
 
 
-async def start_UI_crawler():
+async def start_UI_crawler(DEVICE_ID,SMOKE_PATH):
     #723e928699a1813c67d06b0c825a56333f91e338 (iphone 8 13.7)
     #5f8ed661a709152639f093cf45f09487595ff304
     #d4249935d52f1766a8139ac17e06f2e46e86836c
     #6baa682616264e25c65c25304fb3e1d95e56028a (se)
     #00008020-001564210E78002E (sultan)
     #066fe19b5c1523b4635d852bb9617969a0e384c6 (se 13.0)
-    p = await asyncio.create_subprocess_exec('/usr/local/lib/node_modules/nosmoke/bin/nosmoke', '-u', '5f8ed661a709152639f093cf45f09487595ff304',"-s" , stdout=asyncio.subprocess.PIPE)
+    smoke_bin_path=SMOKE_PATH+"bin/nosmoke"
+    p = await asyncio.create_subprocess_exec(smoke_bin_path, '-u', DEVICE_ID,"-s" , stdout=asyncio.subprocess.PIPE)
     fut = p.communicate()
     try:
         pcap_run = await asyncio.wait_for(fut, timeout=180)
@@ -93,12 +94,12 @@ async def frida_process(bundleID,ROOT):
     
 
 
-def thread_loop_task(loop):
+def thread_loop_task(loop,DEVICE_ID,SMOKE_PATH):
 
-    # 为子线程设置自己的事件循环
+    # set event loop for child thread
     asyncio.set_event_loop(loop)
 
-    future = asyncio.gather(start_UI_crawler())
+    future = asyncio.gather(start_UI_crawler(DEVICE_ID,SMOKE_PATH))
     loop.run_until_complete(future)
     loop.close()
 
@@ -109,12 +110,12 @@ async def print_process(flen):
 
 
 
-def signal_test(bundleID, ROOT):
-    # 创建一个事件循环thread_loop
+def signal_test(bundleID, ROOT,DEVICE_ID,SMOKE_PATH):
+    # create event loop: thread_loop
     thread_loop = asyncio.new_event_loop() 
 
-    # 将thread_loop作为参数传递给子线程
-    t = threading.Thread(target=thread_loop_task, args=(thread_loop,))
+    # pass thread_loop as parameter to child thread
+    t = threading.Thread(target=thread_loop_task, args=(thread_loop,DEVICE_ID,SMOKE_PATH))
     t.daemon = True
     t.start()
 
@@ -132,7 +133,7 @@ def signal_test(bundleID, ROOT):
 
 if __name__ == "__main__":
     bundleID="ai.cloudmall.ios"
-    signal_test(bundleID)
+    signal_test(bundleID,".")
 
 
 

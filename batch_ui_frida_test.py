@@ -15,6 +15,7 @@ import shutil
 import json
 import tqdm.asyncio
 import subprocess
+import argparse
 
 ROOT=""
 ## 读取yaml文件
@@ -92,9 +93,9 @@ def process(name):
 
 #280
 @time_out(200, timeout_callback)
-def test_one_app(bundleID):
+def test_one_app(bundleID,DEVICE_ID,SMOKE_PATH):
 	try:
-		signal_test(bundleID,ROOT)
+		signal_test(bundleID,ROOT,DEVICE_ID,SMOKE_PATH)
 	except KeyboardInterrupt:
 		print("KeyboardInterrupt")
 		return
@@ -103,15 +104,13 @@ def clean_up():
 	process("nosmoke")
 
 
-def write_bundleID_crawler_config(bundleID):
-	yaml_file="/usr/local/lib/node_modules/nosmoke/demo/crawler.config.yml"
+def write_bundleID_crawler_config(bundleID,SMOKE_PATH):
+	yaml_file =SMOKE_PATH+"demo/crawler.config.yml"
 	yaml_info =readyaml(yaml_file)
 	yaml_info['desiredCapabilities']['bundleId']=bundleID
 	writeyaml(yaml_file, yaml_info)
-    #display_info(yaml_info['people_info'])
-	#print ('*'*150)
-	
-        
+
+
 
 def is_installed(bundleID):
 	output = subprocess.run(["ideviceinstaller", "--list-apps"], capture_output=True)
@@ -125,7 +124,7 @@ def is_installed(bundleID):
 
 
 
-def test_one_batch(app_input_path,bundleID,ipa,frida_output_path,ipa_name):
+def test_one_batch(app_input_path,bundleID,ipa,DEVICE_ID,SMOKE_PATH):
 	print("Install the app ...")
 	if is_installed(bundleID):
 		print(bundleID+" successfully installed")
@@ -137,10 +136,10 @@ def test_one_batch(app_input_path,bundleID,ipa,frida_output_path,ipa_name):
 		
 	time.sleep(1)
 	print("begin write to yaml file ...")
-	write_bundleID_crawler_config(bundleID)
+	write_bundleID_crawler_config(bundleID,SMOKE_PATH)
 	
 	time.sleep(1)
-	test_one_app(bundleID)
+	test_one_app(bundleID,DEVICE_ID,SMOKE_PATH)
 	clean_up()
 	time.sleep(1)
 	print("prepare dump app ...")
@@ -191,10 +190,43 @@ def read_log_file(log_file):
 
 if __name__ == "__main__":
 
-	folder=sys.argv[1]
+	#folder=sys.argv[1]
 	#bundleID="ai.cloudmall.ios"
 	#root="/Users/xiaoyue-admin/Documents/privacy_label/code/batch_dynamic_test"
-	ROOT=sys.argv[2]
+	#ROOT=sys.argv[2]
+
+	parser = argparse.ArgumentParser(description="Please specify the parameters")
+	# parser.add_argument("-H", "--Help", help="Example: Help argument", required=False, default="")
+	parser.add_argument("-d", "--dic", help="[Required] specify the repo directory, the default is current directory",
+						required=True, default=".")
+	parser.add_argument("-n", "--folder", help="[Required] specify which folder your test app in", required=True,
+						default="0")
+	parser.add_argument("-i", "--device", help="[Required] specify the device ID of your iOS",
+						required=True, default="")
+	parser.add_argument("-s", "--smoke", help="specify smoke installation path, the default is '/usr/local/lib/node_modules/nosmoke/'", required=False, default="/usr/local/lib/node_modules/nosmoke/")
+
+	argument = parser.parse_args()
+	status = False
+
+	if argument.dic:
+		print("You have used '-d' or '--dic' with argument: {0}".format(argument.dic))
+		status = True
+	if argument.folder:
+		print("You have used '-n' or '--folder' with argument: {0}".format(argument.folder))
+		status = True
+	if argument.device:
+		print("You have used '-i' or '--device' with argument: {0}".format(argument.device))
+		status = True
+	if argument.smoke:
+		print("You have used '-s' or '--smoke' with argument: {0}".format(argument.smoke))
+		status = True
+	if not status:
+		print("Maybe you want to use -d or -n or -m?")
+
+	ROOT=argument.dic
+	folder=argument.folder
+	DEVICE_ID=argument.device
+	SMOKE_PATH=argument.smoke
 
 
 	app_input_path = ROOT+'/app/'+ str(folder)+"/"
@@ -243,7 +275,7 @@ if __name__ == "__main__":
 				#continue
 
 
-		flag=test_one_batch(app_input_path,bundleID,ipa,frida_output_path,ipa_name)
+		flag=test_one_batch(app_input_path,bundleID,ipa,DEVICE_ID,SMOKE_PATH)
 		
 		if flag:
 			end_time=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -278,6 +310,6 @@ if __name__ == "__main__":
 			time.sleep(3)
 		else:
 			with open(error_log, 'a+') as f:
-				f.write(bundleID + " :: intall failed...")
+				f.write(bundleID + " :: install failed...")
 
 		
