@@ -38,6 +38,8 @@
 - `python3.10 -m venv LalaineEnv` 
 - `source LalaineEnv/bin/activate` 
 - `cd Lalaine`
+- `python -m pip install wheel setuptools`
+- `brew install cmake libomp `
 - `pip install -r requirements.txt`
 ### Step one: gather call trace and network traffic by dynamically executing an app in rooted device. 
 - Put the app binary code (.ipa) in the *app* folder *0* (you can create more folder to allow batch analysis). You can use ipatool to download app: <https://github.com/majd/ipatool>
