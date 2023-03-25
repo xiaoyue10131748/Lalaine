@@ -53,13 +53,14 @@
 
 ### Step two: analyze call trace and network traffic to extract (data, purpose) from code behavior.
 - Download the [corpus.csv](https://drive.google.com/file/d/1isjddxbu-yGHBfQc9xlicVVPRde_cBc_/view?usp=share_link) and put it under **purpose_prediction/data/**
+- Download [privacy label of apps](<https://drive.google.com/file/d/1k3FulkLvOhgLV_hU-hkxnuvnP4FF3tXz/view?usp=share_link>) we crawled from app store and put it under *data* folder. If the app you want to test is not on the list, you can mannully add it to this file to allow further analysis. 
 - Run the script `python analyze_log.py -d .  -n 0`
 - More parameters are detailed as follows:
 - <img width="628" alt="image" src="https://user-images.githubusercontent.com/38227314/227628542-4248517d-38cc-42e3-9927-55065dfef037.png">
 - Analyzing result can be found in **./result/0/prediction_output/**
 
 ### Step three: perform compliance check.
-- Download [privacy label of apps](<https://drive.google.com/file/d/1k3FulkLvOhgLV_hU-hkxnuvnP4FF3tXz/view?usp=share_link>) we crawled from app store and put it under *data* folder. If the app you want to test is not on the list, you can mannully add it to this file to allow further complaince check. 
+
 - Run the script `python compliance_check.py -d . -n 0`
 - Options:
 - <img width="626" alt="image" src="https://user-images.githubusercontent.com/38227314/227682071-a990112d-fd26-455c-b0dc-5278b1adf4b4.png">
