@@ -43,6 +43,7 @@
 - launch macaca server to connects with device: `macaca server --verbose`
 - launch Fiddler to capture/decrypt Traffic from iOS Device: `Tools > Options > HTTPS and check Decrypt HTTPS traffic`
 - run the script to execute app and gather data: `python batch_ui_frida_test.py 0 .`
+- save the network traffic under **./result/0/har/** [default path].
 
 ### Step two: analyze call trace and network traffic to extract (data, purpose) from code behavior.
 - Run the script `python analyze_log.py -d .  -n 0`
