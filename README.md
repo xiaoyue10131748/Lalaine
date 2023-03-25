@@ -43,7 +43,7 @@
 - Launch macaca server to connects with device: `macaca server --verbose`
 - Launch Fiddler to capture/decrypt Traffic from iOS Device: `Tools > Options > HTTPS and check Decrypt HTTPS traffic`. *After finishing the dynamic testing, save the network traffic under the default path **./result/0/har/**; (If you save it in other folder, you need specify it when run analyze_log.py)*
 - Obtain your iOS device ID by runing `xcrun xctrace list devices`
-- Run the script to execute app and gather data: `python batch_ui_frida_test.py -d . -n 0 -i <device id>`
+- Run the script to execute app and gather data: `python batch_ui_frida_test.py -d . -n 0 -i <device id> -s <smoke_path>`
 - Options:
 - <img width="630" alt="image" src="https://user-images.githubusercontent.com/38227314/227680270-f0811749-bbf0-4bfa-999b-13f82ad0b47b.png">
 
