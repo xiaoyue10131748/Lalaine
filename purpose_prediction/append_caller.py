@@ -281,7 +281,7 @@ def calltrace_to_domain(unique_mapping_dic:dict,dataAPI_domain_dic:dict,dataAPI_
     df2.to_excel("./traffic/API_caller_mapping.xlsx")
 
 #{API:{caller:domain}}
-def generate_mapping_from_unique_and_multiple_mapping(dataAPI_domain_dic:dict,dataAPI_caller_dic:dict, multi_manual_src="/Volumes/Seagate/Privacy_Label/revision/jiale/traffic/multi_caller_domain_mapping_yue.xlsx"):
+def generate_mapping_from_unique_and_multiple_mapping(dataAPI_domain_dic:dict,dataAPI_caller_dic:dict, multi_manual_src="./purpose_prediction/traffic/multi_caller_domain_mapping_yue.xlsx"):
     #source 1 from unique ooe to one mapping
     api_caller_domain_map=collections.defaultdict(dict)
     for bundle_id in dataAPI_caller_dic.keys():
