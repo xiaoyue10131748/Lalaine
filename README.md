@@ -34,7 +34,7 @@
 
 ## Usage
 ### Step zero: setup python environment
-- install Python 3.10.10
+- install [Python 3.10.10](https://www.python.org/downloads/release/python-31010/)
 - `python3.10 -m venv LalaineEnv` 
 - `source LalaineEnv/bin/activate` 
 - `pip install -r requirements.txt`
