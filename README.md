@@ -5,12 +5,15 @@
 - Xcode 13
 - A rooted iOS device
 
-## What's included in dynamic anlaysis pipeline
-- UI Automation
-- Sensive API Hooking
-- Network monitor
-- Inference (data, purpose) 
-- Compliance check
+## What's included in anlaysis pipeline
+- Downloader
+- Static accessement framework (SAF)
+- Dynamic accessement framework (DAF)
+  - UI Automation
+  - Sensive API Hooking
+  - Network monitor
+  - Inference (data, purpose) 
+  - Compliance check
 
 ## Environment Setup
 ### UI Automation
