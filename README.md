@@ -30,9 +30,15 @@
 - install Fiddler in your MacOS: <https://docs.telerik.com/fiddler/configure-fiddler/tasks/configureformac>
 - configure your rooted iOS device: <https://docs.telerik.com/fiddler/configure-fiddler/tasks/configureforios>
 
+## Downloader Usage
+- install [ipatool](https://github.com/majd/ipatool)
+- Auth with your own AppleID and password `ipatool auth login -e <email> -p <password>`
+- Put the app bundleID in bundleID.txt
+- `cd downloader`
+- `python download.py`
+- The results will be in the folder */ipa*
 
-
-## Usage
+## DFA Usage
 ### Step zero: setup python environment
 - install [Python 3.10.10](https://www.python.org/downloads/release/python-31010/)
 - `python3.10 -m venv LalaineEnv` 
