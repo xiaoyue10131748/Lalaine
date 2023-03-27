@@ -30,6 +30,15 @@
 - install Fiddler in your MacOS: <https://docs.telerik.com/fiddler/configure-fiddler/tasks/configureformac>
 - configure your rooted iOS device: <https://docs.telerik.com/fiddler/configure-fiddler/tasks/configureforios>
 
+### Setup python environment
+- install [Python 3.10.10](https://www.python.org/downloads/release/python-31010/)
+- `python3.10 -m venv LalaineEnv` 
+- `source LalaineEnv/bin/activate` 
+- `cd Lalaine`
+- `python -m pip install wheel setuptools`
+- `brew install cmake libomp `
+- `pip install -r requirements.txt`
+
 ## Downloader Usage
 - install [ipatool](https://github.com/majd/ipatool)
 - Auth with your own AppleID and password `ipatool auth login -e <email> -p <password>`
@@ -39,14 +48,6 @@
 - The results will be in the folder */ipa*
 
 ## DFA Usage
-### Step zero: setup python environment
-- install [Python 3.10.10](https://www.python.org/downloads/release/python-31010/)
-- `python3.10 -m venv LalaineEnv` 
-- `source LalaineEnv/bin/activate` 
-- `cd Lalaine`
-- `python -m pip install wheel setuptools`
-- `brew install cmake libomp `
-- `pip install -r requirements.txt`
 ### Step one: gather call trace and network traffic by dynamically executing an app in rooted device. 
 - Put the app binary code (.ipa) in the *app* folder *0* (you can create more folder to allow batch analysis). You can use ipatool to download app: <https://github.com/majd/ipatool>
 - Launch macaca server to connects with device: `macaca server --verbose`
