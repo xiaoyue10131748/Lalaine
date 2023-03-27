@@ -58,7 +58,7 @@
 - <img width="627" alt="image" src="https://user-images.githubusercontent.com/38227314/227998697-8542c197-5573-428a-b569-e3d1ed51b7f7.png">
 - The results will be in the file *find_in_decrypted_ret.txt*
 
-## DFA Usage
+## DAF Usage
 ### Step one: gather call trace and network traffic by dynamically executing an app in rooted device. 
 - Put the app binary code (.ipa) in the *app* folder *0* (you can create more folder to allow batch analysis). You can use ipatool to download app: <https://github.com/majd/ipatool>
 - Launch macaca server to connects with device: `macaca server --verbose`
