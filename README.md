@@ -49,12 +49,12 @@
   - Auth with your own AppleID and password `ipatool auth login -e <email> -p <password>`
   - `cd downloader`
   - `python download.py --input_file ./app_info.json  --result_dir ./ipa/`
-  - The results will be in the folder */ipa*
+  - The results will be in the folder */ipa/*
 - Privacy label crawler
   - `cd downloader`
   - download [ChromeDriver](https://chromedriver.chromium.org/home) which compatible to your browser and put it under the folder *downloader*
   - `python iosStore_crawler.py --input_file ./app_info.json  --result_dir ./label/ --driver_path ./chromedriver`
-  - The results will be in the folder */label*
+  - The results will be in the folder */label/*
 
 ## SAF Usage
 - `cd staticScanner`
