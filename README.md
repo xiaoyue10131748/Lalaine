@@ -16,11 +16,19 @@
   - Compliance check
 
 ## Environment Setup
+### Setup python environment
+- install [Python 3.10.10](https://www.python.org/downloads/release/python-31010/)
+- `python3.10 -m venv LalaineEnv` 
+- `source LalaineEnv/bin/activate` 
+- `cd Lalaine`
+- `python -m pip install wheel setuptools`
+- `brew install cmake libomp `
+- `pip install -r requirements.txt`
+
 ### UI Automation
 > We utilize Macaca, an open-source automation testing framework that supports various types of applications including native, mobile, hybrid, web, and mobile web applications. Macaca offers automation drivers, environment support, peripheral tools, and integration solutions to tackle challenges such as test automation and client-side performance. In addition, we configure NoSmoke, a cross-platform UI crawler that scans view trees, performs OCR operations, and generates and executes UI test cases.
 - install macaca <https://macacajs.github.io/guide/environment-setup.html#macaca-cli>
 - install nosmoke <https://macacajs.github.io/NoSmoke/guide/>
-
 
 ### Sensitive API Hooking
 > We utilize Frida, a dynamic code instrumentation toolkit. We inject snippets of JavaScript into native apps on iOS. We built our hooking framework on top of the Frida API.
@@ -33,14 +41,6 @@
 - install Fiddler on your MacOS: <https://docs.telerik.com/fiddler/configure-fiddler/tasks/configureformac>
 - configure your rooted iOS device: <https://docs.telerik.com/fiddler/configure-fiddler/tasks/configureforios>
 
-### Setup python environment
-- install [Python 3.10.10](https://www.python.org/downloads/release/python-31010/)
-- `python3.10 -m venv LalaineEnv` 
-- `source LalaineEnv/bin/activate` 
-- `cd Lalaine`
-- `python -m pip install wheel setuptools`
-- `brew install cmake libomp `
-- `pip install -r requirements.txt`
 
 ## Downloader Usage
 - Put the information of the app that you want to download in *app_info.json*
