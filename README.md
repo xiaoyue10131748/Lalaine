@@ -9,9 +9,7 @@
 - [Downloader](#downloader-usage)
 - [Static Assessment Framework](#saf-usage)(SAF)
 - [Dynamic Assessment Framework](#daf-usage) (DAF)
-  - UI Automation
-  - Sensitive API Hooking
-  - Network Monitor
+  - gathter call traces and network traffic
   - Inference (data, purpose) 
   - Compliance check
 
